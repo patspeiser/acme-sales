@@ -13,7 +13,7 @@ var Promise = require('bluebird');
 		SalesPersonRegion: SalesPersonRegion
 	}
 */
-
+console.log(_db.SalesPerson);
 //start server
 Promise.all([_db.SalesPerson.sync({force: true}), _db.Region.sync({force: true}), _db.SalesPersonRegion.sync({force: true})])
 .then( 
@@ -22,7 +22,7 @@ Promise.all([_db.SalesPerson.sync({force: true}), _db.Region.sync({force: true})
 			console.log(chalk.white.bgBlue.bold('listening on port... ' + process.env.port));
 		})
 	},
-	function(falure){
-		console.log('lol');
+	function(failure){
+		console.log(failure);
 })
 
