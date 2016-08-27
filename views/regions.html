@@ -1,13 +1,40 @@
 {% extends './layout.html' %}
 
 {% block content %}
-	<div class='container'>
 
-	<ul>
-		{% for region in regions %}
-			<li>{{ region.name }}</li>
-		{% endfor %}
-	</ul>
-
+<div class='container'>
+	<div class='well'>
+		<form method='POST' action='/regions'>	
+			<div class='form-group'>
+				<input name='zipCode' class='form-control' placeholder='Create New Sales Region (Zip Code)'/>
+			</div>
+				<button type='submit' class='btn btn-primary'> Create Region </button>
+		</form>
 	</div>
+
+
+	{% for region in regions %}			
+		<div class='panel panel-default'>
+			<div class='panel-heading'>
+				{{ region.zipCode }}
+				<form style='display:inline' method='POST' action='/regions/{{region.id}}?_method=DELETE'>
+					<button style='display:inline' type='submit' class='btn btn-danger pull-right'> Delete Region </button>
+				</form>
+				<br clear='all' />
+			</div>
+			<div class='panel-body'>
+				<ul class='list-group'>
+					{% for salesPerson in SalesPeople %}
+						<li class='list-group-item'> 
+						{{ salesPerson.name }}
+							<button class='btn btn-primary pull-right'> Add </button>
+							<br clear='all' />
+						</li>
+					{%  endfor %}
+				</ul>
+			</div>
+		</div>
+		{% endfor %}
+</div>	
+
 {% endblock %}

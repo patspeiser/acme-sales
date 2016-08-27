@@ -9,19 +9,19 @@ var SalesPeople = db.define('Sales_People', {
 	name: Sequelize.STRING
 });
 
-var Region = db.define('Region', {
+var Regions = db.define('Regions', {
 	zipCode: Sequelize.STRING
 });
 
 var SalesPeopleRegion = db.define('Sales_People_Region',{})
 
 SalesPeople.hasMany(SalesPeopleRegion);
-Region.hasMany(SalesPeopleRegion);
+Regions.hasMany(SalesPeopleRegion);
+SalesPeopleRegion.belongsTo(Regions);
 SalesPeopleRegion.belongsTo(SalesPeople);
-SalesPeopleRegion.belongsTo(Region);
 
 module.exports = {
 	SalesPeople: SalesPeople,
-	Region: Region,
+	Regions: Regions,
 	SalesPeopleRegion: SalesPeopleRegion
 }
