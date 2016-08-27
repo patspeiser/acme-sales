@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var swig = require('swig');
-
+var chalk = require('chalk');
 
 //export app to mount on server
 module.exports = app;
@@ -23,6 +23,7 @@ app.use(express.static(__dirname + '/node_modules/'));
 
 //default route
 app.get('/', function(req, res, next){
+	console.log(chalk.magenta(req.url));
 	res.render('index');
 })
 
