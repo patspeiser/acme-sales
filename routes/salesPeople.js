@@ -6,6 +6,7 @@ var Promise = require('bluebird');
 module.exports = router;
 
 router.get('/', function(req,res,next){
+	console.log(chalk.magenta('GET', req.originalUrl + req.url));
 	Promise.all([ 
 		_db.Regions.findAll({}), 
 		_db.SalesPeople.findAll({

@@ -22,11 +22,12 @@ router.delete('/:salesPersonId/:regionId', function(req, res, next){
 	console.log(chalk.green('deleting user' + req.params.salesPersonId + ' from region ' + req.params.regionId))
 	_db.SalesPeopleRegion.destroy({
 		where: {
-			salesPersonId: req.params.salesPersonId,
-			regionId: req.parans.regionId 
+			SalesPersonId: req.params.salesPersonId,
+			RegionId: req.params.regionId 
 		}
 	})
 	.then(function(){
 		res.redirect('back');
 	})
+	.catch(next);
 })
