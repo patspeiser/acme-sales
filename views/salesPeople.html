@@ -2,9 +2,6 @@
 
 {% block content %}
 
-{{ salesPeople | json }}
-
-
 <div class='container'>
 	<div class='well'>
 		<form method='POST' action='/salesPeople'>	
@@ -27,14 +24,33 @@
 			</div>
 			<div class='panel-body'>
 				<ul class='list-group'>
+
 					{% for region in regions %}
-						<li class='list-group-item'> 
-						{{ region.zipCode }}
-							<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}'>
-								<button class='btn btn-primary pull-right'> Add </button>
-							</form>
-							<br clear='all' />
-						</li>
+						{% for salesPersonRegion in salesPeople %}
+							{% for theirRegions in salesPersonRegion.Sales_People_Regions %}
+								{% if theirRegions.RegionId !==  region.id %}
+									<li class='list-group-item'>
+									{{ region.zipCode }}
+										<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}?_method=DELETE'>
+											<button class='btn btn-danger pull-right'> Delete Region </button>
+										</form>
+										<br clear='all' />
+									</li>
+								{% endif %}
+								
+								{% if theirRegions.RegionId ==  region.id %}
+									<li class='list-group-item list-group-item-success'>
+										{{ region.zipCode }}
+										<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}'>
+											<button class='btn btn-primary pull-right'> Add </button>
+										</form>
+										<br clear='all' />
+									</li>
+								{% endif %}
+
+								
+							{% endfor %}	
+						{% endfor %}
 					{%  endfor %}
 				</ul>
 			</div>
