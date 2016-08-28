@@ -1,6 +1,10 @@
 {% extends './layout.html' %}
 
 {% block content %}
+
+{{ salesPeople | json }}
+
+
 <div class='container'>
 	<div class='well'>
 		<form method='POST' action='/salesPeople'>	
