@@ -11,7 +11,7 @@ module.exports = app;
 //routing file set up
 var salesPeople = require('./routes/salesPeople.js');
 var regions = require('./routes/regions.js');
-var salesPersonRegions = require('./routes/salesPersonRegions');
+var salesPeopleRegions = require('./routes/salesPeopleRegions');
 
 //break cache on swig
 swig.setDefaults({ cache: false});
@@ -38,6 +38,6 @@ app.use('/salesPeople', salesPeople);
 app.use('/regions', regions);
 
 //when we delete or create add a user to region or region to user
-app.use('/salesPersonRegions', salesPersonRegions)
+app.use('/salesPeopleRegions', salesPeopleRegions)
 
 

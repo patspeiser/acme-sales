@@ -24,10 +24,12 @@
 			</div>
 			<div class='panel-body'>
 				<ul class='list-group'>
-					{% for salesPerson in SalesPeople %}
+					{% for salesPerson in salesPeople %}
 						<li class='list-group-item'> 
 						{{ salesPerson.name }}
-							<button class='btn btn-primary pull-right'> Add </button>
+							<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}'>
+								<button class='btn btn-primary pull-right'> Add </button>
+							</form>
 							<br clear='all' />
 						</li>
 					{%  endfor %}

@@ -6,13 +6,25 @@ var Promise = require('bluebird');
 module.exports = router;
 
 router.get('/', function(req, res, next){
-	console.log(chalk.magenta(req.originalUrl + req.url))
-	Promise.all([ _db.Regions.findAll({}), _db.SalesPeople.findAll({}) ])
-	.spread(function(regions, salesPeople){
-		res.render('regions', {regions: regions, salesPeople: salesPeople})
+	console.log(chalk.green(req.originalUrl + req.url ))
+	/*_db.Regions.findAll({
+		include: [ {
+			model: _db.SalesPeopleRegion,
+			include: [ _db.SalesPeople ]
+		}]
 	})
-	.catch(next);
+	.then(function(regions){
+		res.render('regions', { regions: regions })
+	})
+	*/
 
+	Promise.all([_db.SalesPeople.findAll({}), _db.Regions.findAll({})])	
+	.spread(
+		function( salesPeople, regions ) {
+			res.render('regions', { salesPeople: salesPeople, regions: regions })
+		}
+	)
+	.catch(next)
 })
 
 router.post('/', function(req,res,next){
