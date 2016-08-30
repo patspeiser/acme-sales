@@ -12,7 +12,6 @@
 		</form>
 	</div>
 
-
 	{% for salesPerson in salesPeople %}
 		<div class='panel panel-default'>
 			<div class='panel-heading'>
@@ -35,19 +34,20 @@
 						</li>
 					{% endif %}
 								
-					{% if salesPerson.Sales_People_Regions.length > 0 %}	
+					{% if salesPerson.Sales_People_Regions.length > 0 %}
 						{% for salesPersonRegion in salesPerson.Sales_People_Regions %}
-								<li {% if region.id == salesPersonRegion.RegionId %} class='list-group-item list-group-item-success' {% else %} class='list-group-item' {% endif %} > 
+						<li  class='list-group-item {% if region.id == salesPersonRegion.RegionId %} list-group-item-success {% endif %}' >
 									{{ region.zipCode }}
 									{% if region.id == salesPersonRegion.RegionId %} 
 										<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}?_method=DELETE'>								 
 											<button class='btn btn-danger pull-right'> Remove </button>
 										</form>
-									 {% else %}
-										 <form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}'>								 
+									{% endif %}
+									{% if region.id != salesPersonRegion.RegionId %}
+										<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}'>								 
 											<button class='btn btn-primary pull-right'> Add </button>
 										</form>
-									 {% endif %}
+									{% endif %}
 									<br clear='all' />
 								</li>
 						{% endfor %}

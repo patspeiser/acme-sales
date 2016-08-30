@@ -25,6 +25,7 @@
 			<div class='panel-body'>
 				<ul class='list-group'>
 					{% for salesPerson in salesPeople %}
+					{{salesPerson.Sales_People_Regions | json}}
 						<li class='list-group-item'> 
 						{{ salesPerson.name }}
 							<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}'>

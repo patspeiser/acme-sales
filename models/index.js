@@ -7,6 +7,12 @@ var db = new Sequelize(process.env.CONN, {
 
 var SalesPeople = db.define('Sales_People', {
 	name: Sequelize.STRING
+},{
+	instanceMethods: {
+		getRegions: function(salesPerson){
+			return console.log('made it here');
+		}
+	}
 });
 
 var Regions = db.define('Regions', {

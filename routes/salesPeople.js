@@ -12,12 +12,16 @@ router.get('/', function(req,res,next){
 		_db.SalesPeople.findAll({
 			include: [ {
 				model: _db.SalesPeopleRegion,
-				include: [ _db.Regions ]
-			}]
-		})
+				include: [ _db.Regions ],
+				required: false
+			}],
+			required: false
+		}),
 	])
 	.spread(function(regions, salesPeople){
-		res.render('salesPeople', { salesPeople: salesPeople, regions: regions })
+		console.log(salesPeople)
+		res.render('salesPeople', {salesPeople: salesPeople, regions: regions})
+				
 	})
 	.catch(next);
 })
