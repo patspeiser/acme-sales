@@ -7,6 +7,9 @@
     "test": "echo \"def ad some tests tho\"",
     "start": "PORT=3000 DATABASE_URL=postgres://localhost:5432/acme_sales nodemon -e js,html server.js"
   },
+  "engines": {
+    "node": "6.2.1"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
