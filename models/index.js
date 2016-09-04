@@ -9,10 +9,18 @@ var SalesPeople = db.define('Sales_People', {
 	name: Sequelize.STRING
 },{
 	instanceMethods: {
-		getRegions: function(salesPerson){
-			return console.log('made it here');
+		hasRegion: function(regionId){
+			var hasRegion = false;
+			if (this.Sales_People_Regions){
+				this.Sales_People_Regions.forEach( function(salesPersonRegion){
+					if (regionId == salesPersonRegion.RegionId){
+						hasRegion = true;
+					};
+				})
+			}
+			return hasRegion;
+			}	
 		}
-	}
 });
 
 var Regions = db.define('Regions', {

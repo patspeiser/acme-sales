@@ -25,14 +25,23 @@
 			<div class='panel-body'>
 				<ul class='list-group'>
 					{% for salesPerson in salesPeople %}
-					{{salesPerson.Sales_People_Regions | json}}
-						<li class='list-group-item'> 
-						{{ salesPerson.name }}
-							<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}'>
-								<button class='btn btn-primary pull-right'> Add </button>
-							</form>
-							<br clear='all' />
-						</li>
+						{% if salesPerson.hasRegion(region.id) %}
+							<li class='list-group-item list-group-item-success'> 
+							{{ salesPerson.name }}
+								<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}?_method=DELETE'>
+									<button class='btn btn-danger pull-right'> Remove </button>
+								</form>
+								<br clear='all' />
+							</li>
+						{% else %}
+							<li class='list-group-item'> 
+							{{ salesPerson.name }}
+								<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}'>
+									<button class='btn btn-primary pull-right'> Add </button>
+								</form>
+								<br clear='all' />
+							</li>
+						{% endif %}
 					{%  endfor %}
 				</ul>
 			</div>

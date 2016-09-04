@@ -24,34 +24,24 @@
 			<div class='panel-body'>
 				<ul class='list-group'>
 				{% for region in regions %}
-					{% if salesPerson.Sales_People_Regions.length == 0 %}
-						<li class='list-group-item'>
-							{{ region.zipCode }}
-							<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}'>								 
-								<button class='btn btn-primary pull-right'> Add </button>
-							</form>
-							<br clear='all' />
-						</li>
-					{% endif %}
-								
-					{% if salesPerson.Sales_People_Regions.length > 0 %}
-						{% for salesPersonRegion in salesPerson.Sales_People_Regions %}
-						<li  class='list-group-item {% if region.id == salesPersonRegion.RegionId %} list-group-item-success {% endif %}' >
-									{{ region.zipCode }}
-									{% if region.id == salesPersonRegion.RegionId %} 
-										<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}?_method=DELETE'>								 
-											<button class='btn btn-danger pull-right'> Remove </button>
-										</form>
-									{% endif %}
-									{% if region.id != salesPersonRegion.RegionId %}
-										<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}'>								 
-											<button class='btn btn-primary pull-right'> Add </button>
-										</form>
-									{% endif %}
-									<br clear='all' />
-								</li>
-						{% endfor %}
-					{% endif %}
+
+						{% if salesPerson.hasRegion(region.id) %}								
+							<li  class='list-group-item list-group-item-success' >
+								{{ region.zipCode }}
+								<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}?_method=DELETE'>
+									<button class='btn btn-danger pull-right'> Remove </button>
+								</form>
+								<br clear='all' />
+							</li>
+						{% else %}
+							<li class='list-group-item'>
+								{{ region.zipCode }}
+								<form style='display:inline' method='POST' action='/salesPeopleRegions/{{salesPerson.id}}/{{region.id}}'>
+									<button class='btn btn-primary pull-right'> Add </button>
+								</form>
+								<br clear='all' />
+							</li>
+						{% endif %}
 				{% endfor %}
 				</ul>
 			</div>

@@ -19,9 +19,7 @@ router.get('/', function(req,res,next){
 		}),
 	])
 	.spread(function(regions, salesPeople){
-		console.log(salesPeople)
 		res.render('salesPeople', {salesPeople: salesPeople, regions: regions})
-				
 	})
 	.catch(next);
 })
