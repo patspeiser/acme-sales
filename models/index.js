@@ -1,7 +1,7 @@
 var Sequelize = require('sequelize');
 var Promise = require('bluebird');
 
-var db = new Sequelize(process.env.CONN, { 
+var db = new Sequelize(process.env.DATABASE_URL, { 
 	logging: false
 })
 
