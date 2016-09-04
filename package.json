@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"def ad some tests tho\"",
-    "start": "PORT=3000 DATABASE_URL=postgres://localhost:5432/acme_sales nodemon -e js,html server.js"
+    "start": "DATABASE_URL=postgres://localhost:5432/acme_sales nodemon -e js,html server.js"
   },
   "engines": {
     "node": "6.2.1"
@@ -17,6 +17,7 @@
     "bootstrap": "^3.3.7",
     "chalk": "^1.1.3",
     "express": "^4.14.0",
+    "heroku": "^0.2.0",
     "method-override": "^2.3.6",
     "pg": "^6.1.0",
     "sequelize": "^3.24.1",
