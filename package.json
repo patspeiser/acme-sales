@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"def ad some tests tho\"",
-    "start": "DATABASE_URL=postgres://localhost/acme_sales nodemon -e js,html server.js"
+    "start": "nodemon -e js,html server.js"
   },
   "engines": {
     "node": "6.2.1"
