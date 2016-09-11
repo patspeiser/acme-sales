@@ -8,10 +8,8 @@ var methodOverride = require('method-override');
 //export app to mount on server
 module.exports = app;
 
-//routing file set up
-var salesPeople = require('./routes/salesPeople.js');
-var regions = require('./routes/regions.js');
-var salesPeopleRegions = require('./routes/salesPeopleRegions');
+app.use(express.static(__dirname + '/node_modules/'));
+
 
 //break cache on swig
 swig.setDefaults({ cache: false});
@@ -21,8 +19,7 @@ app.set('view engine', 'html');
 app.engine('html', swig.renderFile);
 
 //some other setups... static files, body parsing, method overriding
-app.use(express.static(__dirname + '/node_modules/'));
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 
 //default route
@@ -30,6 +27,12 @@ app.get('/', function(req, res, next){
 	console.log(chalk.magenta(req.url));
 	res.render('index');
 })
+
+//routing file set up
+//I think you should just put require in the use method
+var salesPeople = require('./routes/salesPeople.js');
+var regions = require('./routes/regions.js');
+var salesPeopleRegions = require('./routes/salesPeopleRegions');
 
 //when hitting /salesPeople send to the router
 app.use('/salesPeople', salesPeople);

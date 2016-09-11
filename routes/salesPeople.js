@@ -22,7 +22,7 @@ router.get('/', function(req,res,next){
 		res.render('salesPeople', {salesPeople: salesPeople, regions: regions})
 	})
 	.catch(next);
-})
+});
 
 router.post('/', function(req, res, next){
 	console.log(chalk.green('CREATING USER: ', req.body.newSalesUser))
@@ -37,6 +37,7 @@ router.post('/', function(req, res, next){
 
 router.delete('/:id', function(req, res, next){
 	console.log(chalk.green('DELETING USER w/ id: ' + req.params.id));
+  //should we delete SalesPeopleRegion first
 	_db.SalesPeople.destroy({
 		where: {
 			id: req.params.id
